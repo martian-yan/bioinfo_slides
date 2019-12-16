@@ -4,5 +4,5 @@ _site
 .jekyll-metadata
 vendor
 Nodeppt/node_modules
-R/.Rdata
+R/.RData
 R/.Rhistory
