@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
+  <head>
+    <script src="https://use.fontawesome.com/releases/v5.12.0/js/all.js" data-auto-add-css="false"></script>
+    <link href="https://use.fontawesome.com/releases/v5.12.0/css/svg-with-js.css" rel="stylesheet" />
+    <script src="https://cdn.staticfile.org/mermaid/8.2.1/mermaid.min.js"></script>
+  </head>
 
   {%- include head.html -%}
 
   <body>
+
+    {%- include header.html -%}
 
     <main class="page-content" aria-label="Content">
       <div class="wrapper">
@@ -12,5 +19,7 @@
     </main>
 
   </body>
+
+  {%- include footer.html -%}
 
 </html>
