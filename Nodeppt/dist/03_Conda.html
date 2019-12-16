@@ -1,0 +1,42 @@
+<!doctype html><html><head><meta charset=UTF-8><title>03_Conda - By</title><link rel=stylesheet href=http://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href=http://cdn.staticfile.org/prism/1.15.0/themes/prism.min.css><link rel=stylesheet href=http://cdn.staticfile.org/KaTeX/0.10.0-rc.1/katex.min.css><link href=./css/chunk-vendors.7a802bf5.css rel=stylesheet></head><body><div><article id=webslides><section slide class="slide bg-black-blue aligncenter" image="https://source.unsplash.com/C1HhAQrbykQ/ .dark"><span class="background dark" style="background-image:url('https://source.unsplash.com/C1HhAQrbykQ/')"></span><div class=wrap wrap=true><h1 class="text-landing text-shadow">03_Conda</h1><hr><p class=text-intro>By Yan Li</p><p class=text-intro>PhD in Bioinformatics, University of Liverpool</p></div></section><section slide class="slide bg-light aligncenter"><div class=wrap wrap=true><h2>How do we install softwares in Linux?</h2><hr><ul><li>Compile from source code</li><li>Download the binary file</li><li>Use a package manager<ul><li><p>from the system: <strong><code>apt-get</code></strong> (Debian, Ubuntu), <strong><code>yum</code></strong> (CentOS, Red Hat), <strong><code>pacman</code></strong> (Arch, Manjaro), <strong><code>homebrew</code></strong> (Macos)</p></li><li><p>from a programming language: <strong><code>pip</code></strong> (Python), <strong><code>cran</code></strong> (R)</p></li><li><p>Universal package manager: <strong><code>conda</code></strong></p></li></ul></li><li>Use a container: <strong><code>docker</code></strong>, <strong><code>singularity</code></strong></li></ul></div></section><section slide class="slide bg-light aligncenter size-60"><div class=wrap wrap=true><h2>Virtual environment</h2><hr><pre class=language-textile><code class=language-textile><span class="token phrase"><span class="token list"><span class="token punctuation">#</span> conda environments:</span>
+<span class="token list"><span class="token punctuation">#</span>
+base                     /home/yan/anaconda3</span>
+ai                       /home/yan/anaconda3/envs/ai
+bioinfo                  /home/yan/anaconda3/envs/bioinfo
+course                *  /home/yan/anaconda3/envs/course
+</span></code></pre><p class=text-intro>Put conflicting packages in seperate environments</p></div></section><section slide class="slide bg-light aligncenter size-60"><div class=wrap wrap=true><h2>Manage packages</h2><hr><pre class=language-textile><code class=language-textile><span class="token phrase"><span class="token list"><span class="token punctuation">#</span> packages in environment at /home/yan/anaconda3/envs/course:</span>
+<span class="token list"><span class="token punctuation">#</span>
+# Name                    Version                   Build  Channel</span>
+<span class="token inline"><span class="token punctuation">_</span><span class="token italic">libgcc</span><span class="token punctuation">_</span></span>mutex             0.1                        main    conda-forge
+blast                     2.9.0                h20b68b9_1    bioconda
+boost                     1.68.0          py37h8619c78_1001    conda-forge
+boost<span class="token inline"><span class="token punctuation">-</span><span class="token deleted">cpp                 1.68.0            h11c811c_1000    conda</span><span class="token punctuation">-</span></span>forge
+...
+</span></code></pre><p class=text-intro>Manage dependencies automatically</p></div></section><section slide class="slide bg-light aligncenter size-60"><div class=wrap wrap=true><h2>Basic commands</h2><hr><pre class=language-textile><code class=language-textile><span class="token phrase"><span class="token list"><span class="token punctuation">#</span> environment</span>
+conda create <span class="token inline"><span class="token punctuation">-</span><span class="token deleted">n env</span><span class="token punctuation">-</span></span>name
+conda env list
+conda activate env-name
+conda deactivate</span>
+
+<span class="token phrase"><span class="token list"><span class="token punctuation">#</span> package</span>
+conda install package-name
+conda remove package-name
+conda list
+</span></code></pre></div></section><section slide class="slide bg-light aligncenter"><div class=wrap wrap=true><h2>Find a package</h2><hr><p>Go to <a href=https://anaconda.org/ target=_blank>anaconda website <i class="fa fa-external-link"></i></a> and search</p></div></section><section slide class="slide bg-light aligncenter"><div class=wrap wrap=true><h2>Demonstration &amp; Workshop</h2></div></section></article></div><script>window.pluginsOptions = {}
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    let isPrintMode = false;
+    if(~location.search.indexOf('print-pdf')){
+        isPrintMode = true;
+        WebSlides.registerPlugin('scroll', function(){});
+    }
+    const ws = new WebSlides({
+        loop: false
+    })
+    window.wsInstance = ws;
+    if(isPrintMode){
+        ws.slides.forEach(s=>s.show())
+    }
+}, false)</script><script src=./js/chunk-vendors.e98a8274.js></script><script src=./js/03_Conda.840bdd35.js></script></body></html>

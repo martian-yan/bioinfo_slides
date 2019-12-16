@@ -1,0 +1,18 @@
+<!doctype html><html><head><meta charset=UTF-8><title>10_DE_analysis - By</title><link rel=stylesheet href=http://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href=http://cdn.staticfile.org/prism/1.15.0/themes/prism.min.css><link rel=stylesheet href=http://cdn.staticfile.org/KaTeX/0.10.0-rc.1/katex.min.css><link href=./css/chunk-vendors.9e4b4448.css rel=stylesheet></head><body><div><article id=webslides><section slide class="slide bg-black-blue aligncenter" image="https://source.unsplash.com/C1HhAQrbykQ/ .dark"><span class="background dark" style="background-image:url('https://source.unsplash.com/C1HhAQrbykQ/')"></span><div class=wrap wrap=true><h1 class="text-landing text-shadow">10_DE_analysis</h1><hr><p class=text-intro>By Yan Li</p><p class=text-intro>PhD in Bioinformatics, University of Liverpool</p></div></section><section slide class="slide bg-light aligncenter"><div class=wrap wrap=true><h2>RNA-seq</h2><p><img src=./img/overview-of-RNA-seq-technology.14237f17.png alt=RNA-seq></p></div></section><section slide class="slide bg-light aligncenter"><div class=wrap wrap=true><h2>Popular software</h2><hr><ul><li>Mapping: <code>Tophat2</code>, <code>HISAT2</code></li><li>Reads counting: <code>HTSeq-counts</code>, <code>Cufflink</code></li><li>Defferential Expressing analysis: <code>EdgeR</code>, <code>DEseq2</code>, <code>limma</code></li><li>GO enrichment: <code>DAVID</code>, <code>g.profiler</code></li></ul></div></section><section slide class="slide bg-light aligncenter"><div class=wrap wrap=true><h2>Terminology</h2><hr><ul><li>RPKM: Reads Per Kilobase per Million mapped read.<ul><li>RPKM = 10^9 * N / L * 1 / C</li><li>N: the total number of reads mapped to a transcript</li><li>C: the number of reads mapped to a gene</li><li>L: the length of the gene</li></ul></li><li>GO: Gene ontology</li></ul></div></section><section slide class="slide bg-light aligncenter"><div class=wrap wrap=true><h2>Basic Statistics</h2><hr><ul><li>P-value and False discovery rate (FDR) adjusted p values<ul><li>a p-value of 0.05 implies that 5% of all tests will result in false positives.</li><li>An FDR adjusted p-value (or q-value) will result in fewer false positives.</li></ul></li><li>Fold Change<ul><li>Fold change is a measure describing how much a quantity changes going from an initial to a final value.</li></ul></li></ul></div></section><section slide class="slide bg-light aligncenter"><div class=wrap wrap=true><h2>Demonstration and Workshop</h2></div></section></article></div><script>window.pluginsOptions = {}
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    let isPrintMode = false;
+    if(~location.search.indexOf('print-pdf')){
+        isPrintMode = true;
+        WebSlides.registerPlugin('scroll', function(){});
+    }
+    const ws = new WebSlides({
+        loop: false
+    })
+    window.wsInstance = ws;
+    if(isPrintMode){
+        ws.slides.forEach(s=>s.show())
+    }
+}, false)</script><script src=./js/chunk-vendors.e98a8274.js></script><script src=./js/10_DE_analysis.50e48a02.js></script></body></html>
