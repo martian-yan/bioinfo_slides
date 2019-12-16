@@ -1,9 +1,3 @@
-<head>
-  <script src="https://use.fontawesome.com/releases/v5.12.0/js/all.js" data-auto-add-css="false"></script>
-  <link href="https://use.fontawesome.com/releases/v5.12.0/css/svg-with-js.css" rel="stylesheet" />
-  <script src="https://cdn.staticfile.org/mermaid/8.2.1/mermaid.min.js"></script>
-</head>
-
 ---
 # Feel free to add content and custom Front Matter to this file.
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
