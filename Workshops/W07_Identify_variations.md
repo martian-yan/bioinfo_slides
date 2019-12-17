@@ -20,25 +20,26 @@ conda install bwa samtools gatk4 snpeff
     ```sh
     source activate bioinfo
     # Index the reference
-    bwa index salmonella_typhimurium_lt2.fasta
+    mkdir ~/call_snp
+    bwa index ~/seq/salmonella_typhimurium_lt2.fasta
 
     # Mapping
-    bwa mem -t 4 -R '@RG\tID:foo\tPL:illumina\tSM:SRR1056117' salmonella_typhimurium_lt2.fasta  seqtk/SRR10561173_1P_seqtk.fastq.gz seqtk/SRR10561173_2P_seqtk.fastq.gz | samtools view -Sb - > SRR1056117.bam
+    bwa mem -t 4 -R '@RG\tID:foo\tPL:illumina\tSM:SRR1056117' ~/seq/salmonella_typhimurium_lt2.fasta  ~/seqtk/SRR10561173_1P_seqtk.fastq.gz ~/seqtk/SRR10561173_2P_seqtk.fastq.gz | samtools view -Sb - > ~/call_snp/SRR1056117.bam
 
     # Sort
-    samtools sort -@ 4 -m 4G -O bam -o SRR1056117.sorted.bam SRR1056117.bam
+    samtools sort -@ 4 -m 4G -O bam -o ~/call_snp/SRR1056117.sorted.bam ~/call_snp/SRR1056117.bam
 
     # Mark duplicates
-    gatk MarkDuplicates -I SRR1056117.sorted.bam -O SRR1056117.sorted.markdup.bam -M SRR1056117.sorted.markdup_metrics.txt
+    gatk MarkDuplicates -I ~/call_snp/SRR1056117.sorted.bam -O ~/call_snp/SRR1056117.sorted.markdup.bam -M ~/call_snp/SRR1056117.sorted.markdup_metrics.txt
 
     # Index the bam file
-    samtools index SRR1056117.sorted.markdup.bam
+    samtools index ~/call_snp/SRR1056117.sorted.markdup.bam
     ```
 
     Now we can view the bam file use `samtools tview`  
 
     ```sh
-    samtools tview SRR1056117.sorted.markdup.bam --reference salmonella_typhimurium_lt2.fasta
+    samtools tview ~/call_snp/SRR1056117.sorted.markdup.bam --reference ~/seq/salmonella_typhimurium_lt2.fasta
     ```
 
     Press `?` to read the shortcut in `tview`, press `q` to quit.
@@ -49,11 +50,11 @@ conda install bwa samtools gatk4 snpeff
   
     ```sh
     # make GVCF file
-    samtools faidx salmonella_typhimurium_lt2.fasta
-    gatk HaplotypeCaller -R salmonella_typhimurium_lt2.fasta --emit-ref-confidence GVCF -I SRR1056117.sorted.markdup.bam -O SRR1056117.g.vcf
+    samtools faidx ~/seq/salmonella_typhimurium_lt2.fasta
+    gatk HaplotypeCaller -R ~/seq/salmonella_typhimurium_lt2.fasta --emit-ref-confidence GVCF -I ~/call_snp/SRR1056117.sorted.markdup.bam -O ~/call_snp/SRR1056117.g.vcf
 
     # make VCF file
-    gatk GenotypeGVCFs -R salmonella_typhimurium_lt2.fasta -V SRR1056117.g.vcf -O SRR1056117.vcf
+    gatk GenotypeGVCFs -R ~/seq/salmonella_typhimurium_lt2.fasta -V ~/call_snp/SRR1056117.g.vcf -O ~/call_snp/SRR1056117.vcf
     ```
 
 - Try make a Bash script
@@ -77,7 +78,7 @@ conda install bwa samtools gatk4 snpeff
     bwa index $REF
 
     # Mapping
-    bwa mem -t 4 -R "@RG\tID:foo\tPL:illumina\tSM:$SRR" $REF  seqtk/${SRR}_1P_seqtk.fastq.gz seqtk/${SRR}_2P_seqtk.fastq.gz | samtools view -Sb - > ${SRR}.bam
+    bwa mem -t 4 -R "@RG\tID:foo\tPL:illumina\tSM:$SRR" $REF  ~/seqtk/${SRR}_1P_seqtk.fastq.gz ~/seqtk/${SRR}_2P_seqtk.fastq.gz | samtools view -Sb - > ~/call_snp/${SRR}.bam
     
     ... 
     ```
@@ -85,7 +86,7 @@ conda install bwa samtools gatk4 snpeff
     Then you can run this script like:
 
     ```sh
-    bash call_variations.sh salmonella_typhimurium_lt2.fasta SRR1056117
+    bash call_variations.sh ~/seq/salmonella_typhimurium_lt2.fasta SRR1056117
     ```
 
     In this way we can make the whole workflow to be automatic.
