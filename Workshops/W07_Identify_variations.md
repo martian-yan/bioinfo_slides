@@ -49,8 +49,13 @@ conda install bwa samtools gatk4 snpeff
 - Call SNPs
   
     ```sh
-    # make GVCF file
+    # make fasta index
     samtools faidx ~/seq/salmonella_typhimurium_lt2.fasta
+
+    # make fasta dict use gatk
+    gatk CreateSequenceDictionary -R salmonella_typhimurium_lt2.fasta
+
+    # make GVCF file
     gatk HaplotypeCaller -R ~/seq/salmonella_typhimurium_lt2.fasta --emit-ref-confidence GVCF -I ~/call_snp/SRR1056117.sorted.markdup.bam -O ~/call_snp/SRR1056117.g.vcf
 
     # make VCF file

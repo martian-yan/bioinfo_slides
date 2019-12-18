@@ -160,3 +160,4 @@ SRR10561173.114060      163     NC_003197.2     1       60      45S56M  =       
 
 - [gatk best practice  :fa-external-link:](https://software.broadinstitute.org/gatk/best-practices)
 - [Bioinformatics file format  :fa-external-link:](http://www.biotrainee.com/jmzeng/book/basic/filetype.html#sam)
+- [SAM file specification :fa-external-link:](https://samtools.github.io/hts-specs/SAMv1.pdf)
