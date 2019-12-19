@@ -38,3 +38,6 @@ layout: home
   - Dataset
     - [counts](R/counts.csv)
     - [groups](R/metadata.csv)
+- Conclusion
+  - [Conclusion](Nodeppt/dist/11_Conclusion.html)
+  - [Free chat](Nodeppt/dist/12_Chat.html)
