@@ -1,8 +1,9 @@
 # Installation
 ## Follow https://bioconductor.org/packages/release/bioc/html/DESeq2.html
 install.packages("BiocManager")
-BiocManager::install("DESeq2")
-
+## use domestic mirror
+BiocManager::install("DESeq2", site_repository="https://mirrors.tuna.tsinghua.edu.cn/bioconductor")
+  
 library("DESeq2")
 help(package="DESeq2")
 

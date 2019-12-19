@@ -24,22 +24,22 @@ conda install bwa samtools gatk4 snpeff
     bwa index ~/seq/salmonella_typhimurium_lt2.fasta
 
     # Mapping
-    bwa mem -t 4 -R '@RG\tID:foo\tPL:illumina\tSM:SRR1056117' ~/seq/salmonella_typhimurium_lt2.fasta  ~/seqtk/SRR10561173_1P_seqtk.fastq.gz ~/seqtk/SRR10561173_2P_seqtk.fastq.gz | samtools view -Sb - > ~/call_snp/SRR1056117.bam
+    bwa mem -t 4 -R '@RG\tID:foo\tPL:illumina\tSM:SRR1056117' ~/seq/salmonella_typhimurium_lt2.fasta  ~/seqtk/SRR10561173_1P_seqtk.fastq.gz ~/seqtk/SRR10561173_2P_seqtk.fastq.gz | samtools view -Sb - > ~/call_snp/SRR10561173.bam
 
     # Sort
-    samtools sort -@ 4 -m 4G -O bam -o ~/call_snp/SRR1056117.sorted.bam ~/call_snp/SRR1056117.bam
+    samtools sort -@ 4 -m 4G -O bam -o ~/call_snp/SRR10561173.sorted.bam ~/call_snp/SRR10561173.bam
 
     # Mark duplicates
-    gatk MarkDuplicates -I ~/call_snp/SRR1056117.sorted.bam -O ~/call_snp/SRR1056117.sorted.markdup.bam -M ~/call_snp/SRR1056117.sorted.markdup_metrics.txt
+    gatk MarkDuplicates -I ~/call_snp/SRR10561173.sorted.bam -O ~/call_snp/SRR10561173.sorted.markdup.bam -M ~/call_snp/SRR10561173.sorted.markdup_metrics.txt
 
     # Index the bam file
-    samtools index ~/call_snp/SRR1056117.sorted.markdup.bam
+    samtools index ~/call_snp/SRR10561173.sorted.markdup.bam
     ```
 
     Now we can view the bam file use `samtools tview`  
 
     ```sh
-    samtools tview ~/call_snp/SRR1056117.sorted.markdup.bam --reference ~/seq/salmonella_typhimurium_lt2.fasta
+    samtools tview ~/call_snp/SRR10561173.sorted.markdup.bam --reference ~/seq/salmonella_typhimurium_lt2.fasta
     ```
 
     Press `?` to read the shortcut in `tview`, press `q` to quit.
@@ -56,10 +56,10 @@ conda install bwa samtools gatk4 snpeff
     gatk CreateSequenceDictionary -R salmonella_typhimurium_lt2.fasta
 
     # make GVCF file
-    gatk HaplotypeCaller -R ~/seq/salmonella_typhimurium_lt2.fasta --emit-ref-confidence GVCF -I ~/call_snp/SRR1056117.sorted.markdup.bam -O ~/call_snp/SRR1056117.g.vcf
+    gatk HaplotypeCaller -R ~/seq/salmonella_typhimurium_lt2.fasta --emit-ref-confidence GVCF -I ~/call_snp/SRR10561173.sorted.markdup.bam -O ~/call_snp/SRR10561173.g.vcf
 
     # make VCF file
-    gatk GenotypeGVCFs -R ~/seq/salmonella_typhimurium_lt2.fasta -V ~/call_snp/SRR1056117.g.vcf -O ~/call_snp/SRR1056117.vcf
+    gatk GenotypeGVCFs -R ~/seq/salmonella_typhimurium_lt2.fasta -V ~/call_snp/SRR10561173.g.vcf -O ~/call_snp/SRR10561173.vcf
     ```
 
 - Try make a Bash script
@@ -75,23 +75,34 @@ conda install bwa samtools gatk4 snpeff
     ```sh
     #!/bin/bash
 
+    # input "salmonella_typhimurium_lt2" here
     REF=$1
+
+    # input "SRR10561173"
     SRR=$2
 
-    source activate bioinfo
-    # Index the reference
-    bwa index $REF
+    echo -e "###\nThe reference is $REF\n\n"
+    echo -e "###\nWe are now dealing with $SRR\n\n"
 
-    # Mapping
-    bwa mem -t 4 -R "@RG\tID:foo\tPL:illumina\tSM:$SRR" $REF  ~/seqtk/${SRR}_1P_seqtk.fastq.gz ~/seqtk/${SRR}_2P_seqtk.fastq.gz | samtools view -Sb - > ~/call_snp/${SRR}.bam
-    
-    ... 
+    source activate bioinfo
+
+    mkdir ~/call_snp
+
+    bwa index ~/seq/${REF}.fasta
+
+    bwa mem -t 4 -R '@RG\tID:foo\tPL:illumina\tSM:${SRR}' ~/seq/${REF}.fasta  ~/seqtk/${SRR}_1P_seqtk.fastq ~/seqtk/${SRR}_2P_seqtk.fastq | samtools view -Sb - > ~/call_snp/${SRR}.bam
+
+    samtools sort -@ 4 -m 4G -O bam -o ~/call_snp/${SRR}.sorted.bam ~/call_snp/${SRR}.bam
+
+    gatk MarkDuplicates -I ~/call_snp/${SRR}.sorted.bam -O ~/call_snp/${SRR}.sorted.markdup.bam -M ~/call_snp/${SRR}.sorted.markdup_metrics.txt
+
+    samtools index ~/call_snp/${SRR}.sorted.markdup.bam
     ```
 
     Then you can run this script like:
 
     ```sh
-    bash call_variations.sh ~/seq/salmonella_typhimurium_lt2.fasta SRR1056117
+    bash call_variations.sh salmonella_typhimurium_lt2 SRR10561173
     ```
 
     In this way we can make the whole workflow to be automatic.
@@ -146,5 +157,5 @@ conda install bwa samtools gatk4 snpeff
     - Finally, we can annotate the VCF file with the `snpeff` database
 
         ```sh
-        snpEff salmonella_typhimurium_lt2 SRR1056117.vcf > SRR1056117_annotated.vcf
+        snpEff salmonella_typhimurium_lt2 SRR10561173.vcf > SRR10561173_annotated.vcf
         ```

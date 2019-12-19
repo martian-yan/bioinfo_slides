@@ -38,8 +38,12 @@ t.test(Body.length~Sex,data=voles)
 # Use ggplot2 visualise the t-test
 install.packages("ggpubr")
 library("ggpubr")  # or require("ggpubr")
+
 fig <- ggboxplot(voles, x = "Sex", y = "Body.length",
                  color = "Sex", palette = "jco",
                  add = "jitter")
+
 fig + stat_compare_means(method = "t.test")
+
+fig
 

@@ -32,7 +32,7 @@ cd ..
 then run `spades`
 
 ```sh
-spades.py -1 seqtk/SRR10561173_1P_seqtk.fastq.gz -2 seqtk/SRR10561173_2P_seqtk.fastq.gz -s seqtk/SRR10561173_U_seqtk.fastq.gz -k 33,55,91 -o assembly
+spades.py -1 ~/seqtk/SRR10561173_1P_seqtk.fastq.gz -2 ~/seqtk/SRR10561173_2P_seqtk.fastq.gz -s ~/seqtk/SRR10561173_U_seqtk.fastq.gz -k 33,55,91 -o ~/assembly
 ```
 
 Check the result.
@@ -62,7 +62,7 @@ Check the result.
     `quast` use a reference to assess the quality of the assembly. Upload the reference genome and annotation file `salmonella_typhimurium_lt2.fasta` and `salmonella_typhimurium_lt2.gff` to the server.
 
     ```sh
-    quast assembly/SRR10561173.fasta -R salmonella_typhimurium_lt2.fasta -G salmonella_typhimurium_lt2.gff -o quast/
+    quast ~/assembly/SRR10561173.fasta -R ~/seq/salmonella_typhimurium_lt2.fasta -G ~/seq/salmonella_typhimurium_lt2.gff -o ~/quast/
     ```
 
     Check the result.

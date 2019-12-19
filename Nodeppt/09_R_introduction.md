@@ -49,6 +49,8 @@ R\: an **open source** programming language for statistical analysis
 ```r
 # Read data
 voles <- read.csv("Voles.txt", sep='\t')
+# tab seperated table: sep='\t'
+# ',' seperanted table: sep=','
 
 # Check the data
 names(voles)
