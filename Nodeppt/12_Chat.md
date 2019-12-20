@@ -42,3 +42,6 @@ PhD in Bioinformatics, University of Liverpool{.text-intro}
 > "Data is the 21st century's oil"
 > ==Joe Kaeser, Siemens CEO==
 
+<slide class="bg-light aligncenter">
+
+![thx](./public/thank-you.jpg)

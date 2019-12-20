@@ -79,4 +79,3 @@ PhD in Bioinformatics, University of Liverpool{.text-intro}
 - No fear of English
 - No fear of Code
   
-<slide class="bg-light aligncenter size-70" image="thank-you.jpg">
